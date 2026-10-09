@@ -43,3 +43,10 @@ Iteration is `yield`-based so a trie of a million strings does not have to mater
 - `startsWith()` with no argument yields every stored string; `startsWith('')` is equivalent.
 
 `node --test` runs the suite from the project root.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
